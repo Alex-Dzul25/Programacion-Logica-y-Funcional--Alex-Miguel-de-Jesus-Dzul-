@@ -1,8 +1,6 @@
-import json
 
-
-#mapear, filtrar y reducir peliculas
 lista_peliculas = [
+ 
   {
     "Titulo": "El Origen",
     "Año": "2010",
@@ -113,20 +111,20 @@ lista_peliculas = [
     "Tipo": "película",
     "Respuesta": "Verdadero"
   }
+
 ]
 
+# Versión con comprensión de listas
+peliculas_nolan = [{"titulo": p["Titulo"], "calificacion": float(p["CalificaciónIMDB"])} 
+                   for p in lista_peliculas if p["Director"] == "Christopher Nolan"]
+
+# Versión con map y filter (corregida)
 peliculas_nolan = list(map(lambda pelicula: {"titulo": pelicula["Titulo"], "calificacion": 
-    float(pelicula["CalificaciónIMDB"])},filter(lambda pelicula: pelicula["Director"] == "Cristopher Nolan", 
+    float(pelicula["CalificaciónIMDB"])}, filter(lambda pelicula: pelicula["Director"] == "Christopher Nolan", 
    lista_peliculas)))
 
-#calcular calificacion promedio
-promedio_nolan = sum(pelicula["Calificacion"] for pelicula in peliculas_nolan) / len(peliculas_nolan) if peliculas_nolan else 0
-
-#calcular promedio usando reduce
-from functools import reduce
-calificaciones = list(map(lambda pelicula: float(pelicula["CalificaciónIMDB"]), filter(lambda 
-pelicula: pelicula["Director"] == "Cristopher Nolan", lista_peliculas)))
-promedio = reduce(lambda x, y: x + y, calificaciones)/len(calificaciones) if calificaciones else 0
+# Cálculo del promedio
+promedio_nolan = sum(pelicula["calificacion"] for pelicula in peliculas_nolan) / len(peliculas_nolan) if peliculas_nolan else 0
 
 print(peliculas_nolan)
-print(f"Calificación promedio de peliculas de Cristopher Nolan: {promedio_nolan:2f}")
+print(f"Calificación promedio de películas de Christopher Nolan: {promedio_nolan:.2f}")
