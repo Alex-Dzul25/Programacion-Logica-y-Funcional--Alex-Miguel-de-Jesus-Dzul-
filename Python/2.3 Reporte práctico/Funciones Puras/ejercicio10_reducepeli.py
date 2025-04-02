@@ -114,16 +114,16 @@ lista_peliculas = [
 
 ]
 
-# Versión con comprensión de listas
+
 peliculas_nolan = [{"titulo": p["Titulo"], "calificacion": float(p["CalificaciónIMDB"])} 
                    for p in lista_peliculas if p["Director"] == "Christopher Nolan"]
 
-# Versión con map y filter (corregida)
+
 peliculas_nolan = list(map(lambda pelicula: {"titulo": pelicula["Titulo"], "calificacion": 
     float(pelicula["CalificaciónIMDB"])}, filter(lambda pelicula: pelicula["Director"] == "Christopher Nolan", 
    lista_peliculas)))
 
-# Cálculo del promedio
+
 promedio_nolan = sum(pelicula["calificacion"] for pelicula in peliculas_nolan) / len(peliculas_nolan) if peliculas_nolan else 0
 
 print(peliculas_nolan)
